@@ -2,7 +2,7 @@
 Just type your entity name and generate model, views, controller
 
 # Add package
-add <strong>"kajalpandya/crud": "dev-master"</strong> in composer json file
+add <strong>"kajalpandya/crud": "dev-master"</strong> in your composer.json file
 then run 
 <strong>$ composer update</strong>
 
