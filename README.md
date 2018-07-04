@@ -2,11 +2,11 @@
 Just type your entity name and generate model, views, controller
 
 # Add package
-add "kajalpandya/crud": "dev-master" in composer json file
+add <strong>"kajalpandya/crud": "dev-master"</strong> in composer json file
 then run 
 <strong>$ composer update</strong>
 
 # Add provider
-then add provider to your config/app.php file
+then add provider to your <strong>config/app.php</strong> file
 
 <strong>Youcandothis\Crud\CrudServiceProvider::class</strong>
