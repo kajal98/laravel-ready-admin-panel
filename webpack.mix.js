@@ -11,5 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.scripts([
+	'resources/assets/js/jquery.min.js',
+	'resources/assets/js/script.js',
+	'resources/assets/js/plupload.full.min.js',
+	'resources/assets/js/delete.js',
+	], 'public/js/admin.js');
