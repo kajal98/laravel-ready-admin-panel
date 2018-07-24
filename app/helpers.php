@@ -2,69 +2,6 @@
 
 use PragmaRX\Countries\Package\Countries;
 
-function register_time_zone()
-{
-  // Get IP address
-  $ip_address = getenv('HTTP_CLIENT_IP') ?: getenv('HTTP_X_FORWARDED_FOR') ?: getenv('HTTP_X_FORWARDED') ?: getenv('HTTP_FORWARDED_FOR') ?: getenv('HTTP_FORWARDED') ?: getenv('REMOTE_ADDR');
-  // $ip_address = '110.174.165.78';
-
-  //Get JSON object
-  $jsondata = file_get_contents("https://freegeoip.net/json/" . $ip_address);
-      $data = json_decode($jsondata);
-      return $data;
-}
-
-function get_phone_code($country_name)
-{
-  return Countries::where('cca2', $country_name)->first()->dialling->calling_code[0];
-}
-
-function price_dropdown($q)
-{
-  $ret = array(
-      '0-3k'    => array('min'=>'0','max'=>'3000'),
-      '3k-6k'   => array('min'=>'0','max'=>'3000'),
-      '6k-9k'   => array('min'=>'0','max'=>'3000'),
-      '9k-12k'  => array('min'=>'0','max'=>'3000'),
-      '12k-15k' => array('min'=>'0','max'=>'3000'),
-  );
-  return $ret[$q];
-}
-
-function get_timezone($time, $time_zone) {      
-      $time = \Carbon\Carbon::parse($time);
-      $otherTZ = new DateTimeZone($time_zone);
-      $final_time = $time->setTimezone($otherTZ);
-  return $final_time;
-}
-
-function send_message($message, $mobile_number) {
-  $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => "http://api.msg91.com/api/sendhttp.php?sender=eDOCTR&route=4&authkey=195132Ar696cyUGuu5a69da63&encrypt=&country=91&mobiles=" . $mobile_number . "&message=" . $message,
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_SSL_VERIFYHOST => 0,
-      CURLOPT_SSL_VERIFYPEER => 0,
-    ));
-
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-
-    curl_close($curl);
-
-    if ($err) {
-      return false;
-    } else {
-      return true;
-    }
-}
-
 function upload_tmp_path($file) {
   return public_path() . "/tmp/$file";
 }
